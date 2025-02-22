@@ -61,18 +61,13 @@ console.log(sec1_test);
 
 
 const zdata = {
-    section: 3,
-    maxSections: 3,
-    uuid: 'dFGc',
-    raw: ['001003dFGcc1§14.5665132,120.9932811|n§john mark|hc§3|d§saklolo po libog n p o kami d2 sa bacoor', '002003dFGcc1libog n po kami d2 sa bacoor cavite saklolo po libog n po kami d2 sa bacoor cavite saklolo po libog n po kami d2 sa bacoor cavite saklolo po2 s aklol',
-        '003003dFGcc1o po libog n po kami d2 sa bacoor cavite saklolo po libog n po kami d2 sa bacoor cavite saklolo po libog n po kami d2 sa bacoor cavite saklolo po l3'
-    ],
     data: {
         c1: '14.5665132,120.9932811',
         n: 'john mark',
         hc: '3',
-        d: 'saklolo po libog n po kami d2 sa bacoor002003dFGcc1libog n po kami d2 sa bacoor cavite saklolo po libog n po kami d2 sa bacoor cavite saklolo po libog n po kami d2 sa bacoor cavite saklolo po2 saklol003003dFGcc1o po libog n po kami d2 sa bacoor cavite saklolo po libog n po kami d2 sa bacoor cavite saklolo po li bog n po kami d2 sa bacoor cavite saklolo po l3'
-    }, done: true
+        lat: 14.55,
+        long: 7.3,
+    }
 }
 
 console.log(parser.encode(zdata))

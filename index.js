@@ -56,6 +56,16 @@ export class ZemmParser {
         };
     }
 
+
+    generateUUID() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let uuid = '';
+        for (let i = 0; i < 4; i++) {
+            uuid += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return uuid;
+    }
+
     /**
      * Parse ZEMM message
      * @param {string} contents - Raw ZEMM message
@@ -97,7 +107,7 @@ export class ZemmParser {
 
     /**
      * Encode parsed data to Zemm-encoded string
-     * @param {{section: number, maxSections: number, uuid: string, raw: [], data: Object}} zdata - object content of the data
+     * @param {{data: Object}} zdata - object content of the data
      * @returns {String} zemm-encoded array string of the data
      * @throws {Error} If message is invalid
      * */
@@ -109,6 +119,7 @@ export class ZemmParser {
         const kvPairs = Object.keys(zdata.data)
             .map(d => `${d}${String.fromCharCode(167)}${zdata.data[d]}`)
             .join(property_sep);
+        const uuid = zdata.uuid || this.generateUUID();
 
         let result = [];
         for (let i = 0; i < kvPairs.length; i += MAX_LENGTH) {
@@ -116,7 +127,7 @@ export class ZemmParser {
         }
 
         result.forEach((entry, idx) => {
-            const header = `${(idx + 1).toString().padStart(3, '0')}${zdata.maxSections.toString().padStart(3, '0')}${zdata.uuid}`;
+            const header = `${(idx + 1).toString().padStart(3, '0')}${result.length.toString().padStart(3, '0')}${uuid}`;
             const encoded = `${header}${entry}`;
             raw.push(encoded)
         })
